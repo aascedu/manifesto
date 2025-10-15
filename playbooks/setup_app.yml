@@ -1,0 +1,45 @@
+---
+- hosts: all
+  become: true
+  tasks:
+    - name: Copy app source files
+      ansible.builtin.copy:
+        src: ../server
+        dest: /home/ubuntu/
+    - name: Rename nginx init conf
+      ansible.builtin.copy:
+        remote_src: true
+        src: /home/ubuntu/server/conf/proxy.init.conf
+        dest: /home/ubuntu/server/conf/proxy.conf
+    - name: Launch Server for init
+      community.docker.docker_compose_v2:
+        project_src: ./server/
+        files: docker-compose.yml
+        build: always
+        remove_orphans: true
+    - name: Launch Certbot
+      community.docker.docker_compose_v2_run:
+        service: certbot
+        project_src: ./server/
+        files: docker-compose.yml
+        argv:
+          - certonly
+          - --webroot
+          - --webroot-path=/var/www/certbot/
+          - --email=arthurascedu@proton.me
+          - --agree-tos
+          - --no-eff-email
+          - -d
+          - apgolf.xyz
+        cleanup: true
+    - name: Rename nginx final conf
+      ansible.builtin.copy:
+        remote_src: true
+        src: /home/ubuntu/server/conf/proxy.final.conf
+        dest: /home/ubuntu/server/conf/proxy.conf
+    - name: Restart app with new nginx conf
+      community.docker.docker_compose_v2:
+        project_src: ./server/
+        files: docker-compose.yml
+        build: always
+        state: restarted

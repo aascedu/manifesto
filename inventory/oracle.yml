@@ -1,0 +1,7 @@
+all:
+  children:
+    oracle_vm:
+      hosts:
+        manifesto:
+          ansible_host: 141.253.116.226
+          ansible_user: ubuntu
