@@ -11,7 +11,7 @@ I aim to share my projects, experiences, beliefs and more with this website.
 ## process
 
 
-the process of writting and deploying this website is, which reflects the content of the latter, illustrates efficacity and simplicity, which are principles I esteem highly.
+the process of writting and deploying this website reflects the content of the latter, efficacity and simplicity, which are principles I esteem highly.
 
 #### architecture
 
