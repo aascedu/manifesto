@@ -15,5 +15,10 @@ the process of writing and deploying this website reflects its content: simplici
 
 #### architecture
 
-the server is hosted on an oracle cloud instance but will be self hosted in the future. it contains :  
-- a very basic nginx http server that serves static content, with a ssl certificate signed by certbot. the nginx server is containerized with docker and ran with docker compose. the application is deployed on the host with ansible.
+the server is hosted on an oracle cloud instance but will be self hosted in the future. 
+it contains :  
+- a very basic nginx http server that serves static content  
+- a ssl certificate signed by certbot.  
+
+the nginx server is containerized with docker and ran with docker compose.  
+both the server and the application is deployed on the host with ansible.
