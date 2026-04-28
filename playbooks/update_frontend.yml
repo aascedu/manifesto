@@ -1,6 +1,5 @@
 ---
 - hosts: all
-  become: true
   tasks:
     - name: Copy all static files
       ansible.builtin.copy:
